@@ -12,8 +12,8 @@ services:
     ports:
       - 2181:2181
     volumes:
-      - "./docker/data/zookeeper-1:/data"
-      - "./docker/logs/zookeeper-1:/datalog"
+      - "./docker/data/zookeeper-1/zookeeper/:/data"
+      - "./docker/logs/zookeeper-1/zookeeper/:/datalog"
   zookeeper-2:
     build: ./docker/images/zookeeper/
     depends_on:
@@ -26,8 +26,8 @@ services:
     ports:
       - 2182:2181
     volumes:
-      - "./docker/data/zookeeper-2:/data"
-      - "./docker/logs/zookeeper-2:/datalog"
+      - "./docker/data/zookeeper-2/zookeeper/:/data"
+      - "./docker/logs/zookeeper-2/zookeeper/:/datalog"
   zookeeper-3:
     build: ./docker/images/zookeeper/
     environment:
@@ -38,5 +38,5 @@ services:
     ports:
       - 2183:2181
     volumes:
-      - "./docker/data/zookeeper-3:/data"
-      - "./docker/logs/zookeeper-3:/datalog"
+      - "./docker/data/zookeeper-3/zookeeper/:/data"
+      - "./docker/logs/zookeeper-3/zookeeper/:/datalog"
