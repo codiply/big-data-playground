@@ -1,14 +1,55 @@
 version: '3'
 services:
+  kafka-1:
+    build: ./docker/images/kafka/
+    depends_on:
+      - zookeeper-1
+    expose:
+      - 9092
+    ports:
+      - 9092:9092
+    volumes:
+      - ./docker/conf/kafka-1/kafka/:/usr/local/kafka/config/
+      - ./docker/logs/kafka-1/kafka/:/tmp/kafka-logs/
+      - ./docker/conf/kafka-1/supervisord/:/etc/supervisor/conf.d/
+      - ./docker/logs/kafka-1/supervisord/:/var/log/supervisor/
+  kafka-2:
+    build: ./docker/images/kafka/
+    depends_on:
+      - zookeeper-1
+    expose:
+      - 9092
+    ports:
+      - 9093:9092
+    volumes:
+      - ./docker/conf/kafka-2/kafka/:/usr/local/kafka/config/
+      - ./docker/logs/kafka-2/kafka/:/tmp/kafka-logs/
+      - ./docker/conf/kafka-2/supervisord/:/etc/supervisor/conf.d/
+      - ./docker/logs/kafka-2/supervisord/:/var/log/supervisor/
+  kafka-3:
+    build: ./docker/images/kafka/
+    depends_on:
+      - zookeeper-1
+    expose:
+      - 9092
+    ports:
+      - 9094:9092
+    volumes:
+      - ./docker/conf/kafka-3/kafka/:/usr/local/kafka/config/
+      - ./docker/logs/kafka-3/kafka/:/tmp/kafka-logs/
+      - ./docker/conf/kafka-3/supervisord/:/etc/supervisor/conf.d/
+      - ./docker/logs/kafka-3/supervisord/:/var/log/supervisor/
   zookeeper-1:
     build: ./docker/images/zookeeper/
     depends_on:
       - zookeeper-2
     environment:
       ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888
+      ZOO_SERVERS: "server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888"
     expose:
       - 2181
+      - 2888
+      - 3888
     ports:
       - 2181:2181
     volumes:
@@ -20,9 +61,11 @@ services:
       - zookeeper-3
     environment:
       ZOO_MY_ID: 2
-      ZOO_SERVERS: server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888
+      ZOO_SERVERS: "server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888"
     expose:
       - 2181
+      - 2888
+      - 3888
     ports:
       - 2182:2181
     volumes:
@@ -32,9 +75,11 @@ services:
     build: ./docker/images/zookeeper/
     environment:
       ZOO_MY_ID: 3
-      ZOO_SERVERS: server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888
+      ZOO_SERVERS: "server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888"
     expose:
       - 2181
+      - 2888
+      - 3888
     ports:
       - 2183:2181
     volumes:
