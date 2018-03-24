@@ -1,0 +1,42 @@
+version: '3'
+services:
+  zookeeper-1:
+    build: ./docker/images/zookeeper/
+    depends_on:
+      - zookeeper-2
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888
+    expose:
+      - 2181
+    ports:
+      - 2181:2181
+    volumes:
+      - "./docker/data/zookeeper-1:/data"
+      - "./docker/logs/zookeeper-1:/datalog"
+  zookeeper-2:
+    build: ./docker/images/zookeeper/
+    depends_on:
+      - zookeeper-3
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888
+    expose:
+      - 2181
+    ports:
+      - 2182:2181
+    volumes:
+      - "./docker/data/zookeeper-2:/data"
+      - "./docker/logs/zookeeper-2:/datalog"
+  zookeeper-3:
+    build: ./docker/images/zookeeper/
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888
+    expose:
+      - 2181
+    ports:
+      - 2183:2181
+    volumes:
+      - "./docker/data/zookeeper-3:/data"
+      - "./docker/logs/zookeeper-3:/datalog"
