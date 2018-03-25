@@ -1,11 +1,17 @@
-FROM java:openjdk-9-jre
-
-ENV DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:18.04
 
 RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
-    wget \
-    dnsutils \ 
+    build-essential \
+    curl \
+    dnsutils \
+    iputils-ping \
+    kafkacat \ 
+    nano \
+    openjdk-9-jre \
+    openssh-server \
+    software-properties-common \
     supervisor \
+    wget \
  && rm -rf /var/lib/apt/lists/* \
  && apt-get clean
 
@@ -18,5 +24,10 @@ RUN wget -q http://apache.mirror.anlx.net/kafka/${KAFKA_VERSION}/kafka_${SCALA_V
  && tar -xzf /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /usr/local/ && \
     mv /usr/local/kafka_${SCALA_VERSION}-${KAFKA_VERSION} /usr/local/kafka/ && \
     rm /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
+RUN echo 'export PATH="$PATH:/usr/local/kafka/bin"' >> ~/.bash_profile
+
+EXPOSE 22
+RUN echo "\nPermitRootLogin yes\n" >> /etc/ssh/sshd_config
+RUN echo "root\nroot" | passwd
 
 CMD ["/usr/bin/supervisord"]

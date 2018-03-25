@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+python docker/data/delete_all_data.py
+python docker/logs/delete_all_logs.py

@@ -6,8 +6,7 @@ services:
       - zookeeper-1
     expose:
       - 9092
-    ports:
-      - 9092:9092
+    hostname: kafka-1
     volumes:
       - ./docker/conf/kafka-1/kafka/:/usr/local/kafka/config/
       - ./docker/logs/kafka-1/kafka/:/tmp/kafka-logs/
@@ -19,8 +18,7 @@ services:
       - zookeeper-1
     expose:
       - 9092
-    ports:
-      - 9093:9092
+    hostname: kafka-2
     volumes:
       - ./docker/conf/kafka-2/kafka/:/usr/local/kafka/config/
       - ./docker/logs/kafka-2/kafka/:/tmp/kafka-logs/
@@ -32,13 +30,22 @@ services:
       - zookeeper-1
     expose:
       - 9092
-    ports:
-      - 9094:9092
+    hostname: kafka-3
     volumes:
       - ./docker/conf/kafka-3/kafka/:/usr/local/kafka/config/
       - ./docker/logs/kafka-3/kafka/:/tmp/kafka-logs/
       - ./docker/conf/kafka-3/supervisord/:/etc/supervisor/conf.d/
       - ./docker/logs/kafka-3/supervisord/:/var/log/supervisor/
+  probe:
+    build: ./docker/images/probe/
+    hostname: probe
+    ports:
+      - "52022:22"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./docker/conf/probe/supervisord/:/etc/supervisor/conf.d/
+      - ./docker/logs/probe/supervisord/:/var/log/supervisor/
   zookeeper-1:
     build: ./docker/images/zookeeper/
     depends_on:
@@ -50,8 +57,7 @@ services:
       - 2181
       - 2888
       - 3888
-    ports:
-      - 2181:2181
+    hostname: zookeeper-1
     volumes:
       - "./docker/data/zookeeper-1/zookeeper/:/data"
       - "./docker/logs/zookeeper-1/zookeeper/:/datalog"
@@ -66,8 +72,7 @@ services:
       - 2181
       - 2888
       - 3888
-    ports:
-      - 2182:2181
+    hostname: zookeeper-2
     volumes:
       - "./docker/data/zookeeper-2/zookeeper/:/data"
       - "./docker/logs/zookeeper-2/zookeeper/:/datalog"
@@ -80,8 +85,7 @@ services:
       - 2181
       - 2888
       - 3888
-    ports:
-      - 2183:2181
+    hostname: zookeeper-3
     volumes:
       - "./docker/data/zookeeper-3/zookeeper/:/data"
       - "./docker/logs/zookeeper-3/zookeeper/:/datalog"
