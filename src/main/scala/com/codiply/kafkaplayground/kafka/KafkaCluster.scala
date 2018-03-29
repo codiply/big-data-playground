@@ -6,5 +6,6 @@ object KafkaCluster {
   object Topics {
     val RandomNumbers = "random-numbers"
     val MultipliedRandomNumbers = "multiplied-random-numbers"
+    val WikipediaChanges = "wikipedia-changes"
   }
 }

@@ -1,4 +1,4 @@
-package com.codiply.kafkaplayground
+package com.codiply.kafkaplayground.streams
 
 import java.util.Properties
 

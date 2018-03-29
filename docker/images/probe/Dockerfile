@@ -7,8 +7,9 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
     iputils-ping \
     kafkacat \ 
     nano \
-    openjdk-9-jre \
+    openjdk-8-jdk \
     openssh-server \
+    scala \
     software-properties-common \
     supervisor \
     wget \

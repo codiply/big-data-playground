@@ -1,11 +1,11 @@
-package com.codiply.kafkaplayground
+package com.codiply.kafkaplayground.producers
 
-import scala.concurrent.{Await, Future}
-import scala.concurrent.duration._
-import com.codiply.kafkaplayground.kafka.{KafkaCluster, StringProducer}
 import com.codiply.kafkaplayground.kafka.KafkaCluster.Topics
+import com.codiply.kafkaplayground.kafka.StringProducer
 import com.codiply.kafkaplayground.util.DelayedFuture
 
+import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
 import scala.util.Random
 
 object RandomNumberProducer {
