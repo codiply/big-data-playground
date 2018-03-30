@@ -10,11 +10,9 @@ import com.codiply.bdpg.kafka.StringProducer
 import com.codiply.bdpg.model.WikipediaChange
 import com.typesafe.scalalogging.LazyLogging
 import spray.json._
-import spray.json.DefaultJsonProtocol._
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
-
 
 object WikipediaChangesProducer extends LazyLogging {
   import com.codiply.bdpg.model.JsonProtocol._
