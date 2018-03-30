@@ -36,6 +36,16 @@ services:
       - ./docker/logs/kafka-3/kafka/:/tmp/kafka-logs/
       - ./docker/conf/kafka-3/supervisord/:/etc/supervisor/conf.d/
       - ./docker/logs/kafka-3/supervisord/:/var/log/supervisor/
+  kafka-manager:
+    build: ./docker/images/kafka-manager
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    environment:
+      ZK_HOSTS: "zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181"
+    ports:
+      - "9000:9000"
   probe:
     build: ./docker/images/probe/
     hostname: probe
