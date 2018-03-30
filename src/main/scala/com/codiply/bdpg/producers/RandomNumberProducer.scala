@@ -1,8 +1,8 @@
-package com.codiply.kafkaplayground.producers
+package com.codiply.bdpg.producers
 
-import com.codiply.kafkaplayground.kafka.KafkaCluster.Topics
-import com.codiply.kafkaplayground.kafka.StringProducer
-import com.codiply.kafkaplayground.util.DelayedFuture
+import com.codiply.bdpg.kafka.KafkaCluster.Topics
+import com.codiply.bdpg.kafka.StringProducer
+import com.codiply.bdpg.util.DelayedFuture
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}

@@ -1,4 +1,4 @@
-package com.codiply.kafkaplayground.producers
+package com.codiply.bdpg.producers
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -7,8 +7,8 @@ import scala.concurrent.duration._
 import akka.http.scaladsl.model.{HttpRequest, Uri}
 import akka.stream.{ActorMaterializer, Materializer}
 import akka.stream.alpakka.sse.scaladsl.EventSource
-import com.codiply.kafkaplayground.kafka.KafkaCluster.Topics
-import com.codiply.kafkaplayground.kafka.StringProducer
+import com.codiply.bdpg.kafka.KafkaCluster.Topics
+import com.codiply.bdpg.kafka.StringProducer
 
 import scala.concurrent.Await
 import scala.util.parsing.json.JSON

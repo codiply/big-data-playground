@@ -1,4 +1,4 @@
-name := "Kafka Playground"
+name := "Big Data Playground"
 
 version := "0.0.1"
 
@@ -10,4 +10,4 @@ libraryDependencies ++= Seq(
   "org.apache.kafka" % "kafka-clients" % "1.0.0"
 )
 
-assemblyOutputPath in assembly := file("target/kafka-playground/kafka-playground.jar")
+assemblyOutputPath in assembly := file("target/big-data-playground/big-data-playground.jar")

@@ -1,4 +1,4 @@
-package com.codiply.kafkaplayground.kafka
+package com.codiply.bdpg.kafka
 
 import java.util.Properties
 

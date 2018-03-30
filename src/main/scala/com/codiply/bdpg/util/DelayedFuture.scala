@@ -1,4 +1,4 @@
-package com.codiply.kafkaplayground.util
+package com.codiply.bdpg.util
 
 // This code is copied from here: https://stackoverflow.com/a/16363444
 
