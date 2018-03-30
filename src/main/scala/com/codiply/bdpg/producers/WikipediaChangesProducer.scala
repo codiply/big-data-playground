@@ -2,18 +2,23 @@ package com.codiply.bdpg.producers
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-
-import scala.concurrent.duration._
 import akka.http.scaladsl.model.{HttpRequest, Uri}
-import akka.stream.{ActorMaterializer, Materializer}
 import akka.stream.alpakka.sse.scaladsl.EventSource
+import akka.stream.{ActorMaterializer, Materializer}
 import com.codiply.bdpg.kafka.KafkaCluster.Topics
 import com.codiply.bdpg.kafka.StringProducer
+import com.codiply.bdpg.model.WikipediaChange
+import com.typesafe.scalalogging.LazyLogging
+import spray.json._
+import spray.json.DefaultJsonProtocol._
 
 import scala.concurrent.Await
-import scala.util.parsing.json.JSON
+import scala.concurrent.duration._
 
-object WikipediaChangesProducer {
+
+object WikipediaChangesProducer extends LazyLogging {
+  import com.codiply.bdpg.model.JsonProtocol._
+
   private val changesUrl = "https://stream.wikimedia.org/v2/stream/recentchange"
 
   def main(args: Array[String]): Unit = {
@@ -29,14 +34,11 @@ object WikipediaChangesProducer {
     val producer = new StringProducer(Topics.WikipediaChanges)
 
     Await.result(changes.runForeach { serverSentEvent =>
-      JSON.parseFull(serverSentEvent.data) match {
-        case Some(event: Map[String, Any]) => {
-          val key = event("user").toString
-          val value = serverSentEvent.data
-          Await.result(producer.send(key, value), 10.second)
-        }
-        case None => println("Parsing failed")
-        case other => println("Unknown data structure: " + other)
+      try {
+        val change = serverSentEvent.data.parseJson.convertTo[WikipediaChange]
+        producer.send(change.user, change.toJson.toString())
+      } catch {
+        case e: Exception => logger.error(s"Error parsing event.", e)
       }
     }, Duration.Inf)
   }
