@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-ssh -p 52022 root@localhost -o "UserKnownHostsFile /dev/null"

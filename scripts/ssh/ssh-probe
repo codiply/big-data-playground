@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Use password 'root'."
+ssh -p 52022 root@localhost -o "UserKnownHostsFile /dev/null" -o StrictHostKeyChecking=no
