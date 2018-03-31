@@ -1,5 +1,45 @@
 version: '3'
 services:
+  cassandra-1:
+    build: ./docker/images/cassandra/
+    depends_on:
+      - cassandra-2
+      - cassandra-3
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-1
+      CASSANDRA_CLUSTER_NAME: cassandra-cluster
+      CASSANDRA_LISTEN_ADDRESS: cassandra-1
+      CASSANDRA_RPC_ADDRESS: cassandra-1
+      CASSANDRA_SEEDS: "cassandra-2,cassandra-3"
+    hostname: cassandra-1
+    volumes:
+      - ./docker/data/cassandra-1/cassandra/:/var/lib/cassandra/
+      - ./docker/logs/cassandra-1/cassandra/:/var/log/cassandra/
+  cassandra-2:
+    build: ./docker/images/cassandra/
+    depends_on:
+      - cassandra-3
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-2
+      CASSANDRA_CLUSTER_NAME: cassandra-cluster
+      CASSANDRA_LISTEN_ADDRESS: cassandra-2
+      CASSANDRA_RPC_ADDRESS: cassandra-2
+      CASSANDRA_SEEDS: "cassandra-3"
+    hostname: cassandra-2
+    volumes:
+      - ./docker/data/cassandra-2/cassandra/:/var/lib/cassandra/
+      - ./docker/logs/cassandra-2/cassandra/:/var/log/cassandra/
+  cassandra-3:
+    build: ./docker/images/cassandra/
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-3
+      CASSANDRA_CLUSTER_NAME: cassandra-cluster
+      CASSANDRA_RPC_ADDRESS: cassandra-3
+      CASSANDRA_LISTEN_ADDRESS: cassandra-3
+    hostname: cassandra-3
+    volumes:
+      - ./docker/data/cassandra-3/cassandra/:/var/lib/cassandra/
+      - ./docker/logs/cassandra-3/cassandra/:/var/log/cassandra/
   kafka-1:
     build: ./docker/images/kafka/
     depends_on:

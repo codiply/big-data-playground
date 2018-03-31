@@ -16,17 +16,34 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
  && rm -rf /var/lib/apt/lists/* \
  && apt-get clean
 
+ENV APACHE_MIRROR www-eu.apache.org/dist
+
 ENV SCALA_VERSION 2.12
+
+# Install Kafka and bin folder to the path
 ENV KAFKA_VERSION 1.1.0
 ENV KAFKA_HOME /usr/local/kafka
 
-RUN wget -q http://apache.mirror.anlx.net/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
+RUN wget -q http://${APACHE_MIRROR}/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
       -O /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
  && tar -xzf /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz -C /usr/local/ && \
     mv /usr/local/kafka_${SCALA_VERSION}-${KAFKA_VERSION} /usr/local/kafka/ && \
     rm /tmp/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
 RUN echo 'export PATH="$PATH:/usr/local/kafka/bin"' >> ~/.bash_profile
 
+# Install Cassandra and bin folder to the path
+ENV CASSANDRA_VERSION 3.11.2
+ENV CASSANDRA_HOME /usr/local/cassandra
+
+RUN wget -q http://${APACHE_MIRROR}/cassandra/${CASSANDRA_VERSION}/apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz \
+      -O /tmp/apache-cassandra-${CASSANDRA_VERSION}-bin.tgz \
+ && tar -xzf /tmp/apache-cassandra-${CASSANDRA_VERSION}-bin.tgz -C /usr/local/ && \
+    mv /usr/local/apache-cassandra-${CASSANDRA_VERSION} /usr/local/cassandra && \
+    rm /tmp/apache-cassandra-${CASSANDRA_VERSION}-bin.tgz
+RUN echo 'export PATH="$PATH:/usr/local/cassandra/bin"' >> ~/.bash_profile
+RUN echo 'export PATH="$PATH:/usr/local/cassandra/tools/bin"' >> ~/.bash_profile
+
+# Setup SSH
 EXPOSE 22
 RUN echo "\nPermitRootLogin yes\n" >> /etc/ssh/sshd_config
 RUN echo "root\nroot" | passwd
