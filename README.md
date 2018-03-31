@@ -3,6 +3,7 @@
 This is a personal repo for experimenting with big data technologies including
 
 - [Apache Kafka](http://kafka.apache.org/)
+- [Apache Cassandra](http://cassandra.apache.org/)
 
 ## Docker containers
 
@@ -16,6 +17,8 @@ You will need to install
 ### Run the containers
 
 There are currently the following containers defined in `docker-compose.yml`
+
+- `cassandra-1`, `cassandra-2`, `cassandra-3`: Apache Cassandra cluster
 - `kafka-1`, `kafka-2`, `kafka-3`: Apache Kafka cluster
 - `probe`: Used for running applications from the command line from within the docker network
 - `zookeeper-1`, `zookeeper-2`, `zookeeper-3`: Apache Zookeper cluster
