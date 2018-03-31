@@ -1,16 +1,16 @@
-FROM java:openjdk-9-jre
+FROM java:openjdk-8-jre
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
-    wget \
-    dnsutils \ 
+    dnsutils \
     supervisor \
+    wget \
  && rm -rf /var/lib/apt/lists/* \
  && apt-get clean
 
-ENV SCALA_VERSION 2.12
-ENV KAFKA_VERSION 1.1.0
+ARG SCALA_VERSION=2.12
+ARG KAFKA_VERSION=1.1.0
 ENV KAFKA_HOME /usr/local/kafka
 
 RUN wget -q http://apache.mirror.anlx.net/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \

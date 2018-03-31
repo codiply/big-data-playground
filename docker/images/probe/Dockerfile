@@ -16,9 +16,8 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
  && rm -rf /var/lib/apt/lists/* \
  && apt-get clean
 
-ENV APACHE_MIRROR www-eu.apache.org/dist
-
-ENV SCALA_VERSION 2.12
+ARG APACHE_MIRROR=www-eu.apache.org/dist
+ARG SCALA_VERSION=2.12
 
 # Install Kafka and bin folder to the path
 ENV KAFKA_VERSION 1.1.0
