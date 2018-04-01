@@ -8,5 +8,5 @@ services:
     ports:
       - 9080:8080
     volumes:
-      - ../..//notebooks/zeppelin/:/zeppelin-notebooks/
+      - ../../notebooks/zeppelin/:/zeppelin-notebooks/
       - ../logs/zeppelin/zeppelin/:/zeppelin-logs/
