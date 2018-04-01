@@ -1,0 +1,91 @@
+version: '3'
+services:
+  kafka-1:
+    build: ../images/kafka/
+    depends_on:
+      - zookeeper-1
+    expose:
+      - 9092
+    hostname: kafka-1
+    volumes:
+      - ../conf/kafka-1/kafka/:/usr/local/kafka/config/
+      - ../logs/kafka-1/kafka/:/tmp/kafka-logs/
+      - ../conf/kafka-1/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/kafka-1/supervisord/:/var/log/supervisor/
+  kafka-2:
+    build: ../images/kafka/
+    depends_on:
+      - zookeeper-1
+    expose:
+      - 9092
+    hostname: kafka-2
+    volumes:
+      - ../conf/kafka-2/kafka/:/usr/local/kafka/config/
+      - ../logs/kafka-2/kafka/:/tmp/kafka-logs/
+      - ../conf/kafka-2/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/kafka-2/supervisord/:/var/log/supervisor/
+  kafka-3:
+    build: ../images/kafka/
+    depends_on:
+      - zookeeper-1
+    expose:
+      - 9092
+    hostname: kafka-3
+    volumes:
+      - ../conf/kafka-3/kafka/:/usr/local/kafka/config/
+      - ../logs/kafka-3/kafka/:/tmp/kafka-logs/
+      - ../conf/kafka-3/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/kafka-3/supervisord/:/var/log/supervisor/
+  kafka-manager:
+    build: ../images/kafka-manager
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    environment:
+      ZK_HOSTS: "zookeeper-1:2181,zookeeper-2:2181,zookeeper-3:2181"
+    ports:
+      - "9000:9000"
+  zookeeper-1:
+    build: ../images/zookeeper/
+    depends_on:
+      - zookeeper-2
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: "server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888"
+    expose:
+      - 2181
+      - 2888
+      - 3888
+    hostname: zookeeper-1
+    volumes:
+      - "../data/zookeeper-1/zookeeper/:/data"
+      - "../logs/zookeeper-1/zookeeper/:/datalog"
+  zookeeper-2:
+    build: ../images/zookeeper/
+    depends_on:
+      - zookeeper-3
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: "server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888"
+    expose:
+      - 2181
+      - 2888
+      - 3888
+    hostname: zookeeper-2
+    volumes:
+      - "../data/zookeeper-2/zookeeper/:/data"
+      - "../logs/zookeeper-2/zookeeper/:/datalog"
+  zookeeper-3:
+    build: ../images/zookeeper/
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: "server.1=zookeeper-1:2888:3888 server.2=zookeeper-2:2888:3888 server.3=zookeeper-3:2888:3888"
+    expose:
+      - 2181
+      - 2888
+      - 3888
+    hostname: zookeeper-3
+    volumes:
+      - "../data/zookeeper-3/zookeeper/:/data"
+      - "../logs/zookeeper-3/zookeeper/:/datalog"

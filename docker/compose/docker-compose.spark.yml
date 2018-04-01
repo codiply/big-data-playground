@@ -1,0 +1,30 @@
+version: '3'
+services:
+  spark-master:
+    build: ../images/spark/
+    hostname: spark-master
+    environment:
+      SPARK_CONF_DIR: /usr/local/spark/conf/
+      SPARK_LOCAL_IP: spark-master
+      SPARK_MASTER_PORT: 7077
+      SPARK_MASTER_WEBUI_PORT: 8080
+    ports:
+      - 6066:6066
+      - 7077:7077
+      - 8080:8080
+    volumes:
+      - ../conf/spark-master/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/spark-master/supervisord/:/var/log/supervisor/
+      - ../conf/spark-master/spark/:/usr/local/spark/conf/
+      - ../logs/spark-master/spark/:/usr/local/spark/logs/
+  spark-worker:
+    build: ../images/spark/
+    environment:
+      SPARK_MASTER_HOST: spark-master
+    depends_on:
+      - spark-master
+    volumes:
+      - ../conf/spark-worker/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/spark-worker/supervisord/:/var/log/supervisor/
+      - ../conf/spark-worker/spark/:/usr/local/spark/conf/
+      - ../logs/spark-worker/spark/:/usr/local/spark/logs/

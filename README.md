@@ -16,32 +16,53 @@ You will need to install
 - [Docker](https://www.docker.com/) and
 - [Docker Compose](https://docs.docker.com/compose/) (if it is not part of the Docker installation on your platform).
 
+### Build the docker images
+
+You can build all docker images in advance by running
+
+    scripts/docker-compose/build-all
+
 ### Run the containers
 
-The following containers are defined in `docker-compose.yml`
+The following containers are defined in groups in `docker/compose/docker-compose.{group}.yml`.
 
-- `cassandra-1`, `cassandra-2`, `cassandra-3`: Apache Cassandra cluster
-- `kafka-1`, `kafka-2`, `kafka-3`: Apache Kafka cluster
-- `probe`: Used for running applications from the command line from within the docker network
-- `spark-master`, `spark-worker`'s: Apache Spark cluster
-- `zeppelin`: Apache Zeppelin server
-- `zookeeper-1`, `zookeeper-2`, `zookeeper-3`: Apache Zookeper cluster
+To start a group of containers run the corresponding script
 
-To start all containers
+    scripts/docker-compose/{group}-up
 
-    docker-compose up -d
+To remove the containers for a group run the corresponding script
 
-To scale the number of spark workers (to 3 for example)
+    scripts/docker-compose/{group}-down
 
-    docker-compose scale spark-worker=3
+### Apache Cassandra cluster
 
-To stop all containers
+- `cassandra-1`
+- `cassandra-2`
+- `cassandra-3`
 
-    docker-compose stop
+### Apache Kafka cluster
 
-or completely remove them
+- `kafka-1`
+- `kafka-2`
+- `kafka-3`
+- `zookeeper-1`
+- `zookeeper-2`
+- `zookeeper-3`
 
-    docker-compose down
+### Probe
+
+- `probe`:
+
+Used for running applications from the command line from within the docker network.
+
+### Apache Spark cluster
+
+- `spark-master`
+- `spark-worker` (scaled to 3 workers in `spark-up` script)
+
+### Apache Zeppelin
+
+- `zeppelin`
 
 ## Addresses on the host
 
