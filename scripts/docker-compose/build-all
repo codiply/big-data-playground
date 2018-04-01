@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR=`dirname "$0"`
+
+ls $SCRIPT_DIR/../../docker/compose/docker-compose.*.yml | xargs -I {} docker-compose --project-name bdpg -f {} build

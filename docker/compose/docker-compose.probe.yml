@@ -1,0 +1,13 @@
+version: '3'
+services:
+  probe:
+    build: ../images/probe/
+    hostname: probe
+    ports:
+      - "52022:22"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../conf/probe/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/probe/supervisord/:/var/log/supervisor/
+      - ../../target/big-data-playground/:/playground/
