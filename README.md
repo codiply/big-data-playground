@@ -51,7 +51,7 @@ To remove the containers for a group run the corresponding script
 
 ### Probe
 
-- `probe`:
+- `probe`
 
 Used for running applications from the command line from within the docker network.
 
