@@ -1,5 +1,7 @@
 package com.codiply.bdpg.streams
 
+import java.time.format.DateTimeFormatter
+import java.time.{Instant, ZoneId, ZonedDateTime}
 import java.util.Properties
 import java.util.concurrent.TimeUnit
 
@@ -12,7 +14,7 @@ import org.apache.kafka.streams.kstream._
 import org.apache.kafka.streams.{Consumed, KafkaStreams, StreamsBuilder, StreamsConfig}
 import spray.json.DefaultJsonProtocol._
 
-object WikipediaChangeStatistics extends LazyLogging {
+object WikipediaChangesStatistics extends LazyLogging {
   import com.codiply.bdpg.model.AllSerdes._
 
   val applicationId = "wikipedia-change-statistics"
@@ -45,7 +47,8 @@ object WikipediaChangeStatistics extends LazyLogging {
         }, Materialized.`with`(stringSerde, new JsonSerde[Set[String]]()))
         .toStream
         .mapValues[String](_.size.toString)
-        .to(Topics.WikipediaChangesStatistics, Produced.`with`(windowedStringSerde, stringSerde))
+        .selectKey[String]((key, value) => s"${key.key()} : ${printableTimestamp(key.window().start())} -> ${printableTimestamp(key.window().end())}")
+        .to(Topics.WikipediaChangesStatistics)
 
     val streams = new KafkaStreams(builder.build, buildConfig)
     streams.start()
@@ -58,5 +61,11 @@ object WikipediaChangeStatistics extends LazyLogging {
     properties.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass)
     properties.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass)
     properties
+  }
+
+  def printableTimestamp(epochMillis: Long): String = {
+    val instant = Instant.ofEpochMilli(epochMillis)
+    val zonedDateTime = ZonedDateTime.ofInstant(instant, ZoneId.of("UTC"))
+    zonedDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
   }
 }
