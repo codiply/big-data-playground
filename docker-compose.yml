@@ -125,6 +125,16 @@ services:
       - ./docker/logs/spark-worker/supervisord/:/var/log/supervisor/
       - ./docker/conf/spark-worker/spark/:/usr/local/spark/conf/
       - ./docker/logs/spark-worker/spark/:/usr/local/spark/logs/
+  zeppelin:
+    build: ./docker/images/zeppelin/
+    environment:
+      ZEPPELIN_NOTEBOOK_DIR: /zeppelin-notebooks/
+      ZEPPELIN_LOG_DIR: /zeppelin-logs/
+    ports:
+      - 9080:8080
+    volumes:
+      - ./notebooks/zeppelin/:/zeppelin-notebooks/
+      - ./docker/logs/zeppelin/zeppelin/:/zeppelin-logs/
   zookeeper-1:
     build: ./docker/images/zookeeper/
     depends_on:
