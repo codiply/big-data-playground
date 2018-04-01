@@ -5,6 +5,7 @@ This is a personal repo for experimenting with big data technologies including
 - [Apache Cassandra](http://cassandra.apache.org/)
 - [Apache Kafka](http://kafka.apache.org/)
 - [Apache Spark](http://spark.apache.org/)
+- [Apache Zeppelin](http://zeppelin.apache.org/)
 
 ## Docker containers
 
@@ -23,6 +24,7 @@ The following containers are defined in `docker-compose.yml`
 - `kafka-1`, `kafka-2`, `kafka-3`: Apache Kafka cluster
 - `probe`: Used for running applications from the command line from within the docker network
 - `spark-master`, `spark-worker`'s: Apache Spark cluster
+- `zeppelin`: Apache Zeppelin server
 - `zookeeper-1`, `zookeeper-2`, `zookeeper-3`: Apache Zookeper cluster
 
 To start all containers
@@ -48,6 +50,7 @@ Whenever suitable I have bound ports to the host so that for example access to v
 - Kafka Manager (UI): [localhost:9000](http://localhost:9000)
 - Spark Cluster (UI): [localhost:8080](http://localhost:8080)
 - Probe (ssh): [localhost:52022](http://localhost:9000)
+- Zeppelin (UI): [localhost:9080](http://localhost:9080)
 
 ## Access Spark workers
 

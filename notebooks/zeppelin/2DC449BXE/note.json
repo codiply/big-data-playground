@@ -1,0 +1,89 @@
+{
+  "paragraphs": [
+    {
+      "text": "USE system;\nSELECT peer, data_center, host_id, rack, release_version, schema_version FROM peers;",
+      "user": "anonymous",
+      "dateUpdated": "Apr 1, 2018 11:16:11 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 164.0,
+              "optionOpen": false
+            }
+          }
+        },
+        "editorSetting": {
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/undefined"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "peer\tdata_center\thost_id\track\trelease_version\tschema_version\n/172.18.0.8\tdatacenter1\ta943f03b-9d73-4356-b537-6ed09fde44f1\track1\t3.11.2\tdaa255d8-b6c9-39d0-82ff-578d67218de0\n/172.18.0.6\tdatacenter1\tae97175a-d7bb-461d-8a8e-add6a29946c7\track1\t3.11.2\tdaa255d8-b6c9-39d0-82ff-578d67218de0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1522580292854_1195069987",
+      "id": "20180401-105812_884932191",
+      "dateCreated": "Apr 1, 2018 10:58:12 AM",
+      "dateStarted": "Apr 1, 2018 11:16:11 AM",
+      "dateFinished": "Apr 1, 2018 11:16:11 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1522581034138_-1285675",
+      "id": "20180401-111034_1884585569",
+      "dateCreated": "Apr 1, 2018 11:10:34 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Cassandra",
+  "id": "2DC449BXE",
+  "angularObjects": {
+    "2D927PAEC:shared_process": [],
+    "2DAM64HQH:shared_process": [],
+    "2DC3M6HYX:shared_process": [],
+    "2DCD19VB9:shared_process": [],
+    "2DCR41X5G:shared_process": [],
+    "2DB4AU4S7:shared_process": [],
+    "2DB4JMNYM:shared_process": [],
+    "2D9YG5N9Z:shared_process": [],
+    "2DBZGW3DR:shared_process": [],
+    "2DBSDK63M:shared_process": [],
+    "2DC7AAHYF:shared_process": [],
+    "2DAK2YT35:shared_process": [],
+    "2DCEHS2AU:shared_process": [],
+    "2DC61DPR6:shared_process": [],
+    "2DCCW1G5A:shared_process": [],
+    "2DAQ55XR3:shared_process": [],
+    "2DCMQERSE:shared_process": [],
+    "2D9JTGG3N:shared_process": [],
+    "2D94ATNBJ:shared_process": []
+  },
+  "config": {
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {}
+}
