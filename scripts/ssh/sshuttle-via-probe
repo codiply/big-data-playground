@@ -1,11 +1,11 @@
 #!/bin/bash
 
 function cleanup {
-    sudo route delete 172.20.0.0/8
+    sudo route delete 172.20.0.0/24
     ssh-keygen -R [localhost]:52022
 }
 
-sudo route add -net 172.20.0.0/8 -interface lo0
+sudo route add -net 172.20.0.0/24 -interface lo0
 echo "Use password 'root'."
-sshuttle -r root@localhost:52022 172.20.0.0/8
+sshuttle -r root@localhost:52022 172.20.0.0/24
 trap cleanup EXIT
