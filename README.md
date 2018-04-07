@@ -44,6 +44,10 @@ To remove the containers for a group run the corresponding script
 
 - `graphite`
 
+### Jupyter
+
+- `jupyter`
+
 ### Apache Kafka cluster
 
 - `kafka-1`
@@ -75,6 +79,7 @@ Whenever suitable I have bound ports to the host so that for example access to v
 - Grafana (UI): [localhost:9180](http://localhost:9180) (username: `admin`, password: `admin`)
 - Graphite (web): [localhost:9181](http://localhost:9181)
 - Graphite (data): [localhost:9103](http://localhost:9103)
+- Jupyter (UI): [localhost:9999](http://localhost:9999)
 - Kafka Manager (UI): [localhost:9000](http://localhost:9000)
 - Probe (ssh): [localhost:52022](http://localhost:9000)
 - Spark Cluster (UI): [localhost:8080](http://localhost:8080)
