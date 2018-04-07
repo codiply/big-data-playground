@@ -87,9 +87,6 @@ Whenever suitable I have bound ports to the host so that for example access to v
 - StatsD (admin): [localhost:9126](http://localhost:9126)
 - Zeppelin (UI): [localhost:9080](http://localhost:9080)
 
-# StatsD Management port
-EXPOSE  9126
-
 ## Access Spark workers
 
 There are links on the Spark Cluster UI that lead you to spark workers.
