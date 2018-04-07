@@ -26,7 +26,7 @@ object WikipediaChangesStatistics extends LazyLogging {
       builder
         .stream(Topics.WikipediaChanges, Consumed.`with`(stringSerde, wikipediaChangeSerde))
 
-    val window = SessionWindows.`with`(TimeUnit.SECONDS.toMillis(3))
+    val window = TimeWindows.of(TimeUnit.MINUTES.toMillis(5)).advanceBy(TimeUnit.MINUTES.toMillis(1))
 
     changes
       .groupBy(new KeyValueMapper[String, WikipediaChange, String] {
@@ -40,10 +40,6 @@ object WikipediaChangesStatistics extends LazyLogging {
         new Aggregator[String, WikipediaChange, Set[String]] {
           override def apply(key: String, value: WikipediaChange, aggregate: Set[String]): Set[String] =
             aggregate + value.user
-        },
-        new Merger[String, Set[String]] {
-          override def apply(aggKey: String, aggOne: Set[String], aggTwo: Set[String]): Set[String] =
-            aggOne ++ aggTwo
         }, Materialized.`with`(stringSerde, new JsonSerde[Set[String]]()))
         .toStream
         .mapValues[String](_.size.toString)
