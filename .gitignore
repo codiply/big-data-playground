@@ -2,3 +2,7 @@ target/
 
 .idea/
 .big-data-playground.iml
+
+.ipynb_checkpoints/
+.ipython/
+.local/

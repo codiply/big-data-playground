@@ -22,6 +22,7 @@ services:
       - ../logs/spark-master/supervisord/:/var/log/supervisor/
       - ../conf/spark-master/spark/:/usr/local/spark/conf/
       - ../logs/spark-master/spark/:/usr/local/spark/logs/
+      - ../../data/:/data/
   spark-worker:
     build: ../images/spark/
     environment:
@@ -41,3 +42,4 @@ services:
       - ../logs/spark-worker/supervisord/:/var/log/supervisor/
       - ../conf/spark-worker/spark/:/usr/local/spark/conf/
       - ../logs/spark-worker/spark/:/usr/local/spark/logs/
+      - ../../data/:/data/
