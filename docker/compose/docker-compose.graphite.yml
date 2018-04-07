@@ -1,0 +1,16 @@
+version: '3'
+services:
+  graphite:
+    build: ../images/graphite/
+    hostname: graphite
+    ports:
+      - "9180:80"
+      - "9181:81"
+      - "9103:2003"
+      - "9125:8125/udp"
+      - "9126:8126"
+    volumes:
+      - ../data/graphite/grafana/:/opt/grafana/data/
+      - ../data/graphite/whisper/:/opt/graphite/storage/whisper/
+      - ../logs/graphite/graphite/:/opt/graphite/storage/log/
+      - ../logs/graphite/supervisord/:/var/log/supervisor/
