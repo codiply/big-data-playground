@@ -40,6 +40,10 @@ To remove the containers for a group run the corresponding script
 - `cassandra-2`
 - `cassandra-3`
 
+### Graphite - Grafana
+
+- `graphite`
+
 ### Apache Kafka cluster
 
 - `kafka-1`
@@ -68,10 +72,18 @@ Used for running applications from the command line from within the docker netwo
 
 Whenever suitable I have bound ports to the host so that for example access to various UI's is possible.
 
+- Grafana (UI): [localhost:9180](http://localhost:9180) (username: `admin`, password: `admin`)
+- Graphite (web): [localhost:9181](http://localhost:9181)
+- Graphite (data): [localhost:9103](http://localhost:9103)
 - Kafka Manager (UI): [localhost:9000](http://localhost:9000)
-- Spark Cluster (UI): [localhost:8080](http://localhost:8080)
 - Probe (ssh): [localhost:52022](http://localhost:9000)
+- Spark Cluster (UI): [localhost:8080](http://localhost:8080)
+- StatsD (UDP): [localhost:9125](http://localhost:9125)
+- StatsD (admin): [localhost:9126](http://localhost:9126)
 - Zeppelin (UI): [localhost:9080](http://localhost:9080)
+
+# StatsD Management port
+EXPOSE  9126
 
 ## Access Spark workers
 
