@@ -5,4 +5,5 @@ target/
 
 .ipynb_checkpoints/
 .ipython/
+.jupyter/
 .local/
