@@ -1,6 +1,6 @@
 package com.codiply.bdpg.producers
 
-import com.codiply.bdpg.kafka.KafkaCluster.Topics
+import com.codiply.bdpg.constants.KafkaCluster.Topics
 import com.codiply.bdpg.kafka.StringProducer
 import com.codiply.bdpg.util.DelayedFuture
 

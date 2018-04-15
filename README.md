@@ -103,4 +103,4 @@ To access these from the host you will need to install [sshuttle](https://github
 
 - Build a fat jar `big-data-playground.jar` with `sbt assembly`. This is placed under `/target/big-data-playground/`. (Directory `/target/big-data-playground/ is mount at `/playground/` on the `probe` container.)
 - Ssh to the probe container using the `scripts/ssh/ssh-probe` script. The password is `root`.
-- Run a main with `java -cp /playground/ com.codiply.bgdp.SomeClassWithMain`
+- Run a main with `java -cp /playground/big-data-playground.jar com.codiply.bgdp.SomeClassWithMain`

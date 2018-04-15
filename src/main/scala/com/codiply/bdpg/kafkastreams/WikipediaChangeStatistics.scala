@@ -1,12 +1,12 @@
-package com.codiply.bdpg.streams
+package com.codiply.bdpg.kafkastreams
 
 import java.time.format.DateTimeFormatter
 import java.time.{Instant, ZoneId, ZonedDateTime}
 import java.util.Properties
 import java.util.concurrent.TimeUnit
 
-import com.codiply.bdpg.kafka.KafkaCluster
-import com.codiply.bdpg.kafka.KafkaCluster.Topics
+import com.codiply.bdpg.constants.KafkaCluster
+import com.codiply.bdpg.constants.KafkaCluster.Topics
 import com.codiply.bdpg.model.{JsonSerde, WikipediaChange}
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.kafka.common.serialization.Serdes
