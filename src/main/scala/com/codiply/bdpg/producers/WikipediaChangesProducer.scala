@@ -20,7 +20,7 @@ object WikipediaChangesProducer extends LazyLogging {
   private val changesUrl = "https://stream.wikimedia.org/v2/stream/recentchange"
 
   def main(args: Array[String]): Unit = {
-    val actorSystem = ActorSystem.create()
+    val actorSystem = ActorSystem.create("WikipediaChangesProducer")
 
     implicit val materializer: Materializer = ActorMaterializer.create(actorSystem)
 
@@ -31,13 +31,15 @@ object WikipediaChangesProducer extends LazyLogging {
 
     val producer = new StringProducer(Topics.WikipediaChanges)
 
-    Await.result(changes.runForeach { serverSentEvent =>
+    val result = changes.runForeach { serverSentEvent =>
       try {
         val change = serverSentEvent.data.parseJson.convertTo[WikipediaChange]
         producer.send(change.user, change.toJson.toString())
       } catch {
         case e: Exception => logger.error(s"Error parsing event.", e)
       }
-    }, Duration.Inf)
+    }
+
+    Await.result(result, Duration.Inf)
   }
 }
