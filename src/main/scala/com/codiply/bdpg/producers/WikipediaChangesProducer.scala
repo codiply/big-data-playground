@@ -5,7 +5,7 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{HttpRequest, Uri}
 import akka.stream.alpakka.sse.scaladsl.EventSource
 import akka.stream.{ActorMaterializer, Materializer}
-import com.codiply.bdpg.kafka.KafkaCluster.Topics
+import com.codiply.bdpg.constants.KafkaCluster.Topics
 import com.codiply.bdpg.kafka.StringProducer
 import com.codiply.bdpg.model.WikipediaChange
 import com.typesafe.scalalogging.LazyLogging

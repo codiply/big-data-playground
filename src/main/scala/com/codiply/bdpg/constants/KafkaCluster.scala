@@ -1,4 +1,4 @@
-package com.codiply.bdpg.kafka
+package com.codiply.bdpg.constants
 
 object KafkaCluster {
   val BROKERS: List[String] = List("kafka-1:9092", "kafka-2:9092", "kafka-3:9092")

@@ -2,6 +2,7 @@ package com.codiply.bdpg.kafka
 
 import java.util.Properties
 
+import com.codiply.bdpg.constants.KafkaCluster
 import org.apache.kafka.clients.producer.{Callback, KafkaProducer, ProducerRecord, RecordMetadata}
 
 import scala.concurrent.{Future, Promise}

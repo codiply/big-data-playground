@@ -1,9 +1,9 @@
-package com.codiply.bdpg.streams
+package com.codiply.bdpg.kafkastreams
 
 import java.util.Properties
 
-import com.codiply.bdpg.kafka.KafkaCluster
-import com.codiply.bdpg.kafka.KafkaCluster.Topics
+import com.codiply.bdpg.constants.KafkaCluster
+import com.codiply.bdpg.constants.KafkaCluster.Topics
 import org.apache.kafka.common.serialization.Serdes
 import org.apache.kafka.streams.{KafkaStreams, StreamsBuilder, StreamsConfig}
 
