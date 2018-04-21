@@ -14,6 +14,9 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.8.0",
   "io.spray" %%  "spray-json" % "1.3.3",
+  "io.kamon" %% "kamon-core" % "1.1.2",
+  "io.kamon" %% "kamon-statsd" % "0.6.7",
+  "io.kamon" %% "kamon-system-metrics" % "1.0.0",
   "org.apache.kafka" % "kafka-clients" % "1.0.0"
 )
 

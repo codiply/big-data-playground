@@ -9,9 +9,10 @@ import com.codiply.bdpg.constants.KafkaCluster.Topics
 import com.codiply.bdpg.kafka.StringProducer
 import com.codiply.bdpg.model.WikipediaChange
 import com.typesafe.scalalogging.LazyLogging
+import kamon.system.SystemMetrics
 import spray.json._
 
-import scala.concurrent.Await
+import scala.concurrent.{Await, ExecutionContext}
 import scala.concurrent.duration._
 
 object WikipediaChangesProducer extends LazyLogging {
@@ -20,8 +21,11 @@ object WikipediaChangesProducer extends LazyLogging {
   private val changesUrl = "https://stream.wikimedia.org/v2/stream/recentchange"
 
   def main(args: Array[String]): Unit = {
+    SystemMetrics.startCollecting()
+
     val actorSystem = ActorSystem.create("WikipediaChangesProducer")
 
+    implicit val ec: ExecutionContext = actorSystem.dispatcher
     implicit val materializer: Materializer = ActorMaterializer.create(actorSystem)
 
     val http = Http.get(actorSystem)
@@ -38,6 +42,10 @@ object WikipediaChangesProducer extends LazyLogging {
       } catch {
         case e: Exception => logger.error(s"Error parsing event.", e)
       }
+    }.flatMap { _ =>
+      val terminated = actorSystem.terminate()
+      SystemMetrics.stopCollecting()
+      terminated
     }
 
     Await.result(result, Duration.Inf)
