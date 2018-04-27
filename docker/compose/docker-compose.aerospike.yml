@@ -1,0 +1,35 @@
+version: '3'
+services:
+  aerospike-1:
+    build: ../images/aerospike/
+    environment:
+      SERVICE_ADDRESS: aerospike-1
+      HB_ADDRESS: aerospike-1
+      LOGFILE: "/var/log/aerospike/aerospike.log"
+    hostname: aerospike-1
+    volumes:
+      - ../data/aerospike-1/aerospike/:/opt/aerospike/data/
+      - ../data/aerospike-1/lua/:/opt/aerospike/usr/udf/lua/
+      - ../logs/aerospike-1/aerospike/:/var/log/aerospike/
+  aerospike-2:
+    build: ../images/aerospike/
+    environment:
+      SERVICE_ADDRESS: aerospike-2
+      HB_ADDRESS: aerospike-2
+      LOGFILE: "/var/log/aerospike/aerospike.log"
+    hostname: aerospike-2
+    volumes:
+      - ../data/aerospike-2/aerospike/:/opt/aerospike/data/
+      - ../data/aerospike-2/lua/:/opt/aerospike/usr/udf/lua/
+      - ../logs/aerospike-2/aerospike/:/var/log/aerospike/
+  aerospike-3:
+    build: ../images/aerospike/
+    environment:
+      SERVICE_ADDRESS: aerospike-3
+      HB_ADDRESS: aerospike-3
+      LOGFILE: "/var/log/aerospike/aerospike.log"
+    hostname: aerospike-3
+    volumes:
+      - ../data/aerospike-3/aerospike/:/opt/aerospike/data/
+      - ../data/aerospike-3/lua/:/opt/aerospike/usr/udf/lua/
+      - ../logs/aerospike-3/aerospike/:/var/log/aerospike/
