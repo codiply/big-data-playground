@@ -2,6 +2,7 @@
 
 This is a personal repo for experimenting with big data technologies including
 
+- [Aerospike](https://www.aerospike.com/)
 - [Apache Cassandra](http://cassandra.apache.org/)
 - [Apache Kafka](http://kafka.apache.org/)
 - [Apache Spark](http://spark.apache.org/)
@@ -34,21 +35,29 @@ To remove the containers for a group run the corresponding script
 
     scripts/docker-compose/{group}-down
 
-### Apache Cassandra cluster
+### List of containers
+
+#### Aerospike
+
+- `aerospike-1`
+- `aeropsike-2`
+- `aeropsike-2`
+
+#### Apache Cassandra cluster
 
 - `cassandra-1`
 - `cassandra-2`
 - `cassandra-3`
 
-### Graphite - Grafana
+#### Graphite - Grafana
 
 - `graphite`
 
-### Jupyter
+#### Jupyter
 
 - `jupyter`
 
-### Apache Kafka cluster
+#### Apache Kafka cluster
 
 - `kafka-1`
 - `kafka-2`
@@ -57,18 +66,18 @@ To remove the containers for a group run the corresponding script
 - `zookeeper-2`
 - `zookeeper-3`
 
-### Probe
+#### Probe
 
 - `probe`
 
 Used for running applications from the command line from within the docker network.
 
-### Apache Spark cluster
+#### Apache Spark cluster
 
 - `spark-master`
 - `spark-worker` (scaled to 3 workers in `spark-up` script)
 
-### Apache Zeppelin
+#### Apache Zeppelin
 
 - `zeppelin`
 
@@ -103,4 +112,4 @@ To access these from the host you will need to install [sshuttle](https://github
 
 - Build a fat jar `big-data-playground.jar` with `sbt assembly`. This is placed under `/target/big-data-playground/`. (Directory `/target/big-data-playground/ is mount at `/playground/` on the `probe` container.)
 - Ssh to the probe container using the `scripts/ssh/ssh-probe` script. The password is `root`.
-- Run a main with `java -cp /playground/big-data-playground.jar com.codiply.bgdp.SomeClassWithMain`
+- Run a main with `java -cp /playground/big-data-playground.jar com.codiply.bdpg.SomeClassWithMain`
