@@ -2,13 +2,22 @@ FROM ubuntu:18.04
 
 RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
     build-essential \
+    ca-certificates \
     curl \
     dnsutils \
     iputils-ping \
     kafkacat \ 
+    logrotate \
     nano \
     openjdk-8-jdk \
     openssh-server \
+    openssl \
+    python \
+    python-argparse \
+    python-bcrypt \
+    python-dev \
+    python-openssl \
+    python-setuptools \
     scala \
     software-properties-common \
     supervisor \
@@ -53,27 +62,16 @@ RUN wget -q http://$APACHE_MIRROR/spark/spark-${SPARK_VERSION}/spark-${SPARK_VER
     rm /tmp/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 RUN echo 'export PATH="$PATH:/usr/local/spark/bin"' >> ~/.bash_profile
 
-
 # Install Aerospike Tools
-ENV AEROSPIKE_VERSION 3.15.3.2
-ENV AEROSPIKE_SHA256 e544d94728a85a19bc3f671fb50b1073bdd2f239573180269303e2487ee93c48
+ENV AEROSPIKE_VERSION 3.15.3.6
 
-# Work from /aerospike
-WORKDIR /aerospike
+RUN wget "https://www.aerospike.com/artifacts/aerospike-tools/${AEROSPIKE_VERSION}/aerospike-tools-${AEROSPIKE_VERSION}-ubuntu16.04.tgz" \
+      -O /tmp/aerospike-tools.tgz \
+  && mkdir /tmp/aerospike \
+  && tar xzf /tmp/aerospike-tools.tgz --strip-components=1 -C /tmp/aerospike
 
-ENV PATH /aerospike:$PATH
-
-RUN \
-  apt-get update -y \
-  && apt-get install -y python wget logrotate ca-certificates python-dev python-setuptools python-argparse python-bcrypt openssl python-openssl  \
-  && wget "https://www.aerospike.com/artifacts/aerospike-tools/${AEROSPIKE_VERSION}/aerospike-tools-${AEROSPIKE_VERSION}-ubuntu16.04.tgz" -O aerospike-tools.tgz \
-  && echo "$AEROSPIKE_SHA256 *aerospike-tools.tgz" | sha256sum -c - \
-  && mkdir aerospike \
-  && tar xzf aerospike-tools.tgz --strip-components=1 -C aerospike \
-  && apt-get purge -y --auto-remove wget ca-certificates
-
-RUN ls /aerospike/aerospike && dpkg -i /aerospike/aerospike/aerospike-tools-*.ubuntu16.04.x86_64.deb \
-  && rm -rf aerospike-tools.tgz aerospike /var/lib/apt/lists/*
+RUN ls /tmp/ && dpkg -i /tmp/aerospike/aerospike-tools-*.ubuntu16.04.x86_64.deb \
+  && rm -rf /tmp/aerospike-tools.tgz /tmp/aerospike
 
 # Setup SSH
 EXPOSE 22
