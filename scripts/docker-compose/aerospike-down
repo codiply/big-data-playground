@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR=`dirname "$0"`
+
+docker-compose -f $SCRIPT_DIR/../../docker/compose/docker-compose.aerospike.yml --project-name bdpg down
