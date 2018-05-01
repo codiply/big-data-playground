@@ -1,5 +1,7 @@
 FROM ubuntu:16.10
 
+RUN sed -i -re 's/([a-z]{2}\.)?archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+
 RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
     build-essential \
     ca-certificates \

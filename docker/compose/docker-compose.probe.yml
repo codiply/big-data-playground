@@ -11,3 +11,4 @@ services:
       - ../conf/probe/supervisord/:/etc/supervisor/conf.d/
       - ../logs/probe/supervisord/:/var/log/supervisor/
       - ../../target/big-data-playground/:/playground/
+      - ../../data/:/data/
