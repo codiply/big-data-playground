@@ -5,6 +5,7 @@ version := "0.0.1"
 scalaVersion := "2.12.4"
 
 libraryDependencies ++= Seq(
+  "com.aerospike" % "aerospike-client" % "4.1.6",
   "com.lightbend" %% "kafka-streams-scala" % "0.2.0",
   "com.lightbend.akka" %% "akka-stream-alpakka-cassandra" % "0.18",
   "com.lightbend.akka" %% "akka-stream-alpakka-sse" % "0.18",
