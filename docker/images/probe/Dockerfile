@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.10
 
 RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
     build-essential \
@@ -73,9 +73,13 @@ RUN wget "https://www.aerospike.com/artifacts/aerospike-tools/${AEROSPIKE_VERSIO
 RUN ls /tmp/ && dpkg -i /tmp/aerospike/aerospike-tools-*.ubuntu16.04.x86_64.deb \
   && rm -rf /tmp/aerospike-tools.tgz /tmp/aerospike
 
+RUN echo 'export PATH="$PATH:/opt/aerospike/lib/python"' >> ~/.bash_profile
+RUN echo 'export PYTHONPATH="$PYTHONPATH:/opt/aerospike/lib/python"' >> ~/.bash_profile
+
 # Setup SSH
 EXPOSE 22
-RUN echo "\nPermitRootLogin yes\n" >> /etc/ssh/sshd_config
+#RUN echo "\nPermitRootLogin yes\n" >> /etc/ssh/sshd_config
+RUN sed -i 's/prohibit-password/yes/' /etc/ssh/sshd_config
 RUN echo "root\nroot" | passwd
 
 CMD ["/usr/bin/supervisord"]
