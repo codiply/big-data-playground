@@ -4,6 +4,7 @@ This is a personal repo for experimenting with big data technologies including
 
 - [Aerospike](https://www.aerospike.com/)
 - [Apache Cassandra](http://cassandra.apache.org/)
+- [Apache Hadoop](http://hadoop.apache.org/)
 - [Apache Kafka](http://kafka.apache.org/)
 - [Apache Spark](http://spark.apache.org/)
 - [Apache Zeppelin](http://zeppelin.apache.org/)
@@ -48,6 +49,13 @@ To remove the containers for a group run the corresponding script
 - `cassandra-1`
 - `cassandra-2`
 - `cassandra-3`
+
+#### Apache Hadoop cluster
+
+- `hadoop-master`
+- `hadoop-slave-1`
+- `hadoop-slave-2`
+- `hadoop-slave-3`
 
 #### Graphite - Grafana
 

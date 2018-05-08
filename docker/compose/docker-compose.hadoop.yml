@@ -1,0 +1,69 @@
+version: '3'
+services:
+  hadoop-master:
+    build: ../images/hadoop-master/
+    environment:
+      HADOOP_LOG_DIR: /var/log/hadoop/
+      HADOOP_CONF_DIR: /etc/hadoop/
+      YARN_LOG_DIR: /var/log/yarn/
+    expose:
+      - 22
+      - 80
+      - "8030-8033"
+      - 8088
+      - 50070
+    hostname: hadoop-master
+    ports:
+      - 8088:8088
+      - 50070:50070
+    volumes:
+      - ../conf/hadoop-master/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/hadoop-master/supervisord/:/var/log/supervisor/
+      - ../conf/hadoop-master/hadoop/:/etc/hadoop/
+      - ../logs/hadoop-master/hadoop/:/var/log/hadoop/
+      - ../logs/hadoop-master/yarn/:/var/log/yarn/
+  hadoop-slave-1:
+    build: ../images/hadoop-slave/
+    environment:
+      HADOOP_LOG_DIR: /var/log/hadoop/
+      HADOOP_CONF_DIR: /etc/hadoop/
+      YARN_LOG_DIR: /var/log/yarn/
+    depends_on:
+      - hadoop-master
+    hostname: hadoop-slave-1
+    volumes:
+      - ../conf/hadoop-slave/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/hadoop-slave-1/supervisord/:/var/log/supervisor/
+      - ../conf/hadoop-slave/hadoop/:/etc/hadoop/
+      - ../logs/hadoop-slave-1/hadoop/:/var/log/hadoop/
+      - ../logs/hadoop-slave-1/yarn/:/var/log/yarn/
+  hadoop-slave-2:
+    build: ../images/hadoop-slave/
+    environment:
+      HADOOP_LOG_DIR: /var/log/hadoop/
+      HADOOP_CONF_DIR: /etc/hadoop/
+      YARN_LOG_DIR: /var/log/yarn/
+    depends_on:
+      - hadoop-master
+    hostname: hadoop-slave-2
+    volumes:
+      - ../conf/hadoop-slave/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/hadoop-slave-2/supervisord/:/var/log/supervisor/
+      - ../conf/hadoop-slave/hadoop/:/etc/hadoop/
+      - ../logs/hadoop-slave-2/hadoop/:/var/log/hadoop/
+      - ../logs/hadoop-slave-2/yarn/:/var/log/yarn/
+  hadoop-slave-3:
+    build: ../images/hadoop-slave/
+    environment:
+      HADOOP_LOG_DIR: /var/log/hadoop/
+      HADOOP_CONF_DIR: /etc/hadoop/
+      YARN_LOG_DIR: /var/log/yarn/
+    depends_on:
+      - hadoop-master
+    hostname: hadoop-slave-3
+    volumes:
+      - ../conf/hadoop-slave/supervisord/:/etc/supervisor/conf.d/
+      - ../logs/hadoop-slave-3/supervisord/:/var/log/supervisor/
+      - ../conf/hadoop-slave/hadoop/:/etc/hadoop/
+      - ../logs/hadoop-slave-3/hadoop/:/var/log/hadoop/
+      - ../logs/hadoop-slave-3/yarn/:/var/log/yarn/
