@@ -14,6 +14,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get install -y  \
     openjdk-8-jdk \
     openssh-server \
     openssl \
+    postgresql-client \
     python \
     python-argparse \
     python-bcrypt \
@@ -54,7 +55,7 @@ RUN echo 'export PATH="$PATH:/usr/local/cassandra/bin"' >> ~/.bash_profile
 RUN echo 'export PATH="$PATH:/usr/local/cassandra/tools/bin"' >> ~/.bash_profile
 
 # Install Spark and add bin folder to the path
-ARG SPARK_VERSION=2.3.0
+ARG SPARK_VERSION=2.3.1
 ARG HADOOP_VERSION=2.7
 
 RUN wget -q http://$APACHE_MIRROR/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \

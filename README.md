@@ -72,6 +72,10 @@ To remove the containers for a group run the corresponding script
 
 Used for running applications from the command line from within the docker network.
 
+#### PostgreSQL
+
+- `postgres`
+
 #### Apache Spark cluster
 
 - `spark-master`
@@ -94,7 +98,8 @@ Whenever suitable I have bound ports to the host so that for example access to v
 - Graphite (data): [localhost:9103](http://localhost:9103)
 - Jupyter (UI): [localhost:9999](http://localhost:9999)
 - Kafka Manager (UI): [localhost:9000](http://localhost:9000)
-- Probe (ssh): [localhost:52022](http://localhost:9000)
+- PostgreSQL: [localhost:6432](http://localhost:6432)
+- Probe (ssh): [localhost:52022](http://localhost:52022)
 - Spark Cluster (UI): [localhost:8080](http://localhost:8080)
 - StatsD (UDP): [localhost:9125](http://localhost:9125)
 - StatsD (admin): [localhost:9126](http://localhost:9126)
