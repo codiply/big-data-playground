@@ -77,6 +77,10 @@ Used for running applications from the command line from within the docker netwo
 - `spark-master`
 - `spark-worker` (scaled to 3 workers in `spark-up` script)
 
+### Superset
+
+- `superset`
+
 #### Apache Zeppelin
 
 - `zeppelin`
@@ -94,6 +98,7 @@ Whenever suitable I have bound ports to the host so that for example access to v
 - Spark Cluster (UI): [localhost:8080](http://localhost:8080)
 - StatsD (UDP): [localhost:9125](http://localhost:9125)
 - StatsD (admin): [localhost:9126](http://localhost:9126)
+- Superset: [localhost:8188](http://localhost:8188)
 - Zeppelin (UI): [localhost:9080](http://localhost:9080)
 
 ## Access Spark workers
