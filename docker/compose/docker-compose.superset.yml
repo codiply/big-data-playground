@@ -1,0 +1,9 @@
+version: '3'
+services:
+  superset:
+    build: ../images/superset/
+    hostname: superset
+    ports:
+      - "8188:8088"
+    volumes:
+      - ../data/superset/superset/:/var/lib/superset/
