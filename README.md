@@ -107,6 +107,12 @@ There are links on the Spark Cluster UI that lead you to spark workers.
 
 To access these from the host you will need to install [sshuttle](https://github.com/sshuttle/sshuttle) and run the `scripts/ssh/sshuttle-via-probe` script. The password is `root`.
 
+## Using the probe
+
+- Start the probe container
+- SSH to it using the `scripts/ssh/ssh-probe` script. The password is `root`.
+- Use command line tools and access other containers using their hostname
+
 ## Run an application/main written in Scala
 
 ### Prerequisites
@@ -116,5 +122,13 @@ To access these from the host you will need to install [sshuttle](https://github
 ### Run them on Probe container
 
 - Build a fat jar `big-data-playground.jar` with `sbt assembly`. This is placed under `/target/big-data-playground/`. (Directory `/target/big-data-playground/ is mount at `/playground/` on the `probe` container.)
-- Ssh to the probe container using the `scripts/ssh/ssh-probe` script. The password is `root`.
+- SSH to the probe container (see above)
 - Run a main with `java -cp /playground/big-data-playground.jar com.codiply.bdpg.SomeClassWithMain`
+
+## Inspect a Kafka topic
+
+SSH to the probe container and then inspect a topic with `kafkacat`
+
+    kafkacat -C -b kafka-1 -t topic-name -f 'Topic %t[%p], offset: %o, key: %k, payload: %S bytes: %s\n'
+
+replacing `topic-name` with the actual topic name.
