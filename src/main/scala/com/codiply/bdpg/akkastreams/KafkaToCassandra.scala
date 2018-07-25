@@ -20,10 +20,6 @@ object KafkaToCassandra {
     implicit val actorSystem = ActorSystem.create("KafkaToCassandra")
     implicit val materializer = ActorMaterializer()
 
-    val consumerSettings = ConsumerSettings(actorSystem,
-      AllDeserializers.stringDeserializer,
-      AllSerdes.wikipediaChangeSerde.deserializer()).withBootstrapServers(KafkaCluster.BROKERS.mkString(","))
-
     val source = createKafkaSource
     val sink = createCassandraSink
 
@@ -33,7 +29,6 @@ object KafkaToCassandra {
 
     Await.result(result, Duration.Inf)
   }
-
 
   private def createKafkaSource(implicit system: ActorSystem) = {
     val keyDeserialzer = AllDeserializers.stringDeserializer
